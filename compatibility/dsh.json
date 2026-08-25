@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "packageVersion": "0.1.0",
+  "upstream": {
+    "repository": "deepseek-ai/deepseek-harness",
+    "defaultBranch": "master",
+    "verifiedTag": "dsh-v0.1.1-rc.2",
+    "verifiedVersion": "0.1.1-rc.2",
+    "verifiedTagCommit": "b150a551b8d465e31e418e1b2eaf5e79bbb7d28e",
+    "verifiedReleasePublishedAt": "2026-08-21T12:35:08Z",
+    "reviewedHead": "b150a551b8d465e31e418e1b2eaf5e79bbb7d28e",
+    "reviewedAt": "2026-08-24",
+    "routeDigestAlgorithm": "sha256 of sorted path:gitBlobSha rows with a trailing LF",
+    "routeDigest": "bac0f088f16870d062f42fb8c6902100f027f3f0a085d0190c71b81d12584c61"
+  },
+  "claim": {
+    "level": "single-release",
+    "statement": "Version 0.1.0 targets only DSH 0.1.1-rc.2; release compatibility requires the repository CI and installable-bundle acceptance evidence.",
+    "excludes": [
+      "DeepSeek endorsement",
+      "compatibility with any unlisted DSH release",
+      "security or compatibility certification of catalog entries",
+      "provider-native installation validation"
+    ]
+  },
+  "routeAuthorities": [
+    { "path": "AGENTS.md", "when": "repository and plugin conventions" },
+    { "path": "apps/cli/reference/README.md", "when": "profile and plugin commands" },
+    { "path": "apps/cli/src/plugin.ts", "when": "installed bundle behavior" },
+    { "path": "docs/user/develop/basic/config.md", "when": "plugin configuration" },
+    { "path": "docs/user/develop/basic/index.md", "when": "independent plugin loading" },
+    { "path": "docs/user/develop/basic/publish.md", "when": "bundle package metadata" },
+    { "path": "packages/boot/app-boot/src/profile.ts", "when": "profile and bundle manifests" },
+    { "path": "packages/client/connection/src/client/index.ts", "when": "browser Connection service" },
+    { "path": "packages/client/connection/src/rpc-host.ts", "when": "Host Connection RPC lifecycle" },
+    { "path": "packages/client/connection/src/rpc.ts", "when": "Connection RPC types and loopback authority" },
+    { "path": "packages/client/modules/src/index.ts", "when": "Host-side client module discovery" },
+    { "path": "packages/client/ui-settings-plugins/src/client/index.ts", "when": "Plugins settings ownership" },
+    { "path": "packages/client/ui-settings/src/client/index.ts", "when": "Settings slots" },
+    { "path": "packages/client/ui-slots/src/index.ts", "when": "Client slot registration" },
+    { "path": "packages/client/web/src/platform.ts", "when": "Web client module loading" },
+    { "path": "packages/core/agent-loop/src/tool-calls.ts", "when": "durable model-facing tool result logging" },
+    { "path": "packages/core/tools/src/code-mode.ts", "when": "Code Mode canonical result exposure and nested result logging" },
+    { "path": "packages/core/tools/src/index.ts", "when": "model-facing tool registration" },
+    { "path": "packages/llm/llm/src/types.ts", "when": "model content block vocabulary" },
+    { "path": "packages/skill/skill/src/index.ts", "when": "current skill capability reads" }
+  ]
+}

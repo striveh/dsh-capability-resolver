@@ -1,0 +1,102 @@
+name: Upstream DSH compatibility
+
+on:
+  schedule:
+    - cron: "17 3 * * 1"
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: upstream-dsh-compatibility
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    if: >-
+      github.repository == 'striveh/dsh-capability-resolver' &&
+      (github.event_name == 'schedule' ||
+       github.ref_name == github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 22.19.0
+      - name: Verify compatibility record
+        run: node scripts/verify-compatibility.mjs
+      - name: Test compatibility helpers
+        run: node --test scripts/upstream-lib.test.mjs
+      - name: Compare tracked DSH authorities
+        id: audit
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          status=0
+          node scripts/check-upstream.mjs --report "$RUNNER_TEMP/dsh-upstream-report.md" || status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+      - name: Ensure the machine-owned label
+        if: steps.audit.outputs.status == '0' || steps.audit.outputs.status == '2'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >-
+          gh label create upstream-drift --repo "$GITHUB_REPOSITORY" --force
+          --color D93F0B --description "Machine-detected upstream compatibility review"
+      - name: Open or update the drift issue
+        if: steps.audit.outputs.status == '2'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPORT_PATH: ${{ runner.temp }}/dsh-upstream-report.md
+        shell: bash
+        run: |
+          marker="<!-- dsh-capability-resolver:upstream-drift:v1 -->"
+          title="Upstream DSH compatibility review required"
+          issues=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label upstream-drift --limit 1000 --json number,body)
+          issue_count=$(jq --arg marker "$marker" '[.[] | select((.body // "") | contains($marker))] | length' <<<"$issues")
+          if [[ "$issue_count" -gt 1 ]]; then
+            echo "multiple machine-owned drift issues found" >&2
+            exit 1
+          elif [[ "$issue_count" -eq 1 ]]; then
+            issue_number=$(jq --arg marker "$marker" -r '.[] | select((.body // "") | contains($marker)) | .number' <<<"$issues")
+            current_body=$(jq --arg marker "$marker" -r '.[] | select((.body // "") | contains($marker)) | .body' <<<"$issues")
+            fingerprint=$(sed -n 's/^<!-- fingerprint:\([0-9a-f]\{64\}\) -->$/\1/p' "$REPORT_PATH")
+            if [[ ! "$fingerprint" =~ ^[0-9a-f]{64}$ ]]; then
+              echo "drift report lacks a valid fingerprint" >&2
+              exit 1
+            fi
+            if [[ "$current_body" != *"<!-- fingerprint:$fingerprint -->"* ]]; then
+              gh issue edit "$issue_number" --repo "$GITHUB_REPOSITORY" --title "$title" --body-file "$REPORT_PATH"
+            fi
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --label upstream-drift --title "$title" --body-file "$REPORT_PATH"
+          fi
+      - name: Close a resolved drift issue
+        if: steps.audit.outputs.status == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          marker="<!-- dsh-capability-resolver:upstream-drift:v1 -->"
+          issues=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label upstream-drift --limit 1000 --json number,body)
+          issue_count=$(jq --arg marker "$marker" '[.[] | select((.body // "") | contains($marker))] | length' <<<"$issues")
+          if [[ "$issue_count" -gt 1 ]]; then
+            echo "multiple machine-owned drift issues found" >&2
+            exit 1
+          elif [[ "$issue_count" -eq 1 ]]; then
+            issue_number=$(jq --arg marker "$marker" -r '.[] | select((.body // "") | contains($marker)) | .number' <<<"$issues")
+            gh issue close "$issue_number" --repo "$GITHUB_REPOSITORY" --comment "Resolved by the reviewed compatibility record on the default branch."
+          fi
+      - name: Fail on drift or audit error
+        if: steps.audit.outputs.status != '0'
+        env:
+          AUDIT_STATUS: ${{ steps.audit.outputs.status }}
+        run: exit "$AUDIT_STATUS"

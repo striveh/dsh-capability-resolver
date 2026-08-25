@@ -1,0 +1,14 @@
+- insert:
+    - id: dsh-capability-resolver
+      name: dsh-capability-resolver
+      config:
+        freshCacheMs: 900000
+        staleCacheMs: 86400000
+        fetchTimeoutMs: 5000
+        maxCatalogBytes: 8388608
+        maxCatalogEntries: 5000
+        maxTaskChars: 2000
+        maxResults: 8
+        maxCurrentMatches: 8
+        maxDescriptionChars: 600
+        maxMatchedTerms: 12
