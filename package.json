@@ -1,6 +1,6 @@
 {
   "name": "dsh-capability-resolver",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Read-only local capability and community plugin discovery for DeepSeek Harness Web",
   "license": "MIT",
   "type": "module",

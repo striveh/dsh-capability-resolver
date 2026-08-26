@@ -3,6 +3,7 @@ import { dirname, resolve } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
 const PACKAGE_NAME = 'dsh-capability-resolver'
+const PACKAGE_VERSION = '0.1.1'
 const PLUGIN_NAME = 'capability-resolver'
 const DSH_VERSION = '0.1.1-rc.2'
 const PATCH_PATH = './cordis.patch.yml'
@@ -106,7 +107,7 @@ try {
 }
 
 check(manifest.name === PACKAGE_NAME, `package name must be ${PACKAGE_NAME}`)
-check(manifest.version === '0.1.0', 'initial package version must be 0.1.0')
+check(manifest.version === PACKAGE_VERSION, `package version must be ${PACKAGE_VERSION}`)
 check(manifest.type === 'module', 'package type must be module')
 check(manifest.main === 'lib/index.js', 'main must be lib/index.js')
 check(manifest.types === 'lib/types/index.d.ts', 'types must be lib/types/index.d.ts')
@@ -223,7 +224,7 @@ for (const readmePath of ['README.md', 'README.zh.md']) {
   } catch (error) {
     failures.push(`cannot read ${readmePath}: ${error instanceof Error ? error.message : String(error)}`)
   }
-  check(readme.includes('dsh plugin --profile web add github:striveh/dsh-capability-resolver#v0.1.0'), `${readmePath} must contain the pinned GitHub install command`)
+  check(readme.includes(`dsh plugin --profile web add github:striveh/dsh-capability-resolver#v${PACKAGE_VERSION}`), `${readmePath} must contain the pinned GitHub install command`)
   check(readme.includes(DSH_VERSION), `${readmePath} must state the sole ${DSH_VERSION} compatibility target`)
   check(readme.includes(CATALOG_URL), `${readmePath} must disclose the fixed catalog URL`)
 }

@@ -13,7 +13,7 @@ Catalog inclusion, topics, stars, and download counts are discovery metadata. Th
 
 ## Status and compatibility
 
-Version `0.1.0` has one declared target: DeepSeek Harness `0.1.1-rc.2`. It does not claim compatibility with an older or newer DSH release.
+Version `0.1.1` has one declared target: DeepSeek Harness `0.1.1-rc.2`. It does not claim compatibility with an older or newer DSH release. This maintenance release changes release metadata and installation guidance; resolver runtime behavior is unchanged from `0.1.0`.
 
 The machine-readable record is [`compatibility/dsh.json`](compatibility/dsh.json). A weekly workflow compares the latest published DSH release and the Git blob digest of the exact official files this plugin relies on. A new release, moved tag, missing authority, or changed digest opens or updates one review issue and fails the workflow. Automation never broadens the compatibility claim.
 
@@ -36,12 +36,19 @@ Prerequisites:
 - Node.js `22.19` or a newer version allowed by the package engine; and
 - pnpm on `PATH`, as required by `dsh plugin`.
 
-After the `v0.1.0` release is published, install the reviewed tag into the Web profile:
+Install the pinned `v0.1.1` tag into the Web profile:
 
 ```sh
-dsh plugin --profile web add github:striveh/dsh-capability-resolver#v0.1.0
+dsh plugin --profile web add github:striveh/dsh-capability-resolver#v0.1.1
 dsh --profile web --dump-config
 dsh web
+```
+
+To update an existing `v0.1.0` installation, run the same pinned `add` command for `v0.1.1`, inspect the expanded configuration, and restart Web:
+
+```sh
+dsh plugin --profile web add github:striveh/dsh-capability-resolver#v0.1.1
+dsh --profile web --dump-config
 ```
 
 Restart a running Web profile after adding, updating, disabling, or removing the bundle. The expanded configuration should contain a `dsh-capability-resolver` layer. The repository commits `lib/` and intentionally has no `prepare`, `preinstall`, `install`, or `postinstall` script, so a GitHub install does not need package build permission.
