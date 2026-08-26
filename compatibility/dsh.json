@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "packageVersion": "0.1.0",
+  "packageVersion": "0.1.1",
   "upstream": {
     "repository": "deepseek-ai/deepseek-harness",
     "defaultBranch": "master",
@@ -15,7 +15,7 @@
   },
   "claim": {
     "level": "single-release",
-    "statement": "Version 0.1.0 targets only DSH 0.1.1-rc.2; release compatibility requires the repository CI and installable-bundle acceptance evidence.",
+    "statement": "Version 0.1.1 targets only DSH 0.1.1-rc.2; release compatibility requires the repository CI and installable-bundle acceptance evidence.",
     "excludes": [
       "DeepSeek endorsement",
       "compatibility with any unlisted DSH release",
