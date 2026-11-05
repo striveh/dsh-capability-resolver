@@ -13,7 +13,7 @@
 
 ## 状态与兼容性
 
-版本 `0.1.1` 只声明一个目标：DeepSeek Harness `0.1.1-rc.2`。它不声称兼容更早或更新的 DSH 版本。此维护版本只更新发布元数据与安装指引；解析器运行时行为与 `0.1.0` 相同。
+版本 `0.2.0` 只声明一个目标：DeepSeek Harness `0.2.1-rc.5`。它不声称兼容更早或更新的 DSH 版本。此版本把解析器迁移到已审阅的 `0.2.1-rc.5` 兼容通道，并适配更名后的 client store、slots renderer 与 PTC 工具接口。
 
 机器可读记录位于 [`compatibility/dsh.json`](compatibility/dsh.json)。每周 workflow 会比较 DSH 最新公开 release，并计算本插件依赖的官方文件 Git blob 摘要。出现新 release、tag 移动、事实源缺失或摘要变化时，自动化会新建或更新一个审阅 issue 并让 workflow 失败；它不会自动扩大兼容声明。
 
@@ -32,22 +32,22 @@
 
 前置条件：
 
-- DeepSeek Harness `0.1.1-rc.2`；
+- DeepSeek Harness `0.2.1-rc.5`；
 - Node.js `22.19` 或 package engine 允许的更新版本；
 - `PATH` 中有 pnpm，这是 `dsh plugin` 的要求。
 
-把固定的 `v0.1.1` tag 安装进 Web profile：
+把固定的 `v0.2.0` tag 安装进 Web profile：
 
 ```sh
-dsh plugin --profile web add github:striveh/dsh-capability-resolver#v0.1.1
+dsh plugin --profile web add github:striveh/dsh-capability-resolver#v0.2.0
 dsh --profile web --dump-config
 dsh web
 ```
 
-如需把现有 `v0.1.0` 安装更新到 `v0.1.1`，执行同一条固定到 `v0.1.1` 的 `add` 命令，检查展开后的配置，然后重启 Web：
+如需把现有 `v0.1.1` 安装更新到 `v0.2.0`，执行同一条固定到 `v0.2.0` 的 `add` 命令，检查展开后的配置，然后重启 Web：
 
 ```sh
-dsh plugin --profile web add github:striveh/dsh-capability-resolver#v0.1.1
+dsh plugin --profile web add github:striveh/dsh-capability-resolver#v0.2.0
 dsh --profile web --dump-config
 ```
 
@@ -130,7 +130,7 @@ Host 持有有界、内存中的 last-good 目录缓存。UI 请求通过 loopba
 
 ```sh
 pnpm install --frozen-lockfile
-node scripts/assert-dsh-test-version.mjs 0.1.1-rc.2
+node scripts/assert-dsh-test-version.mjs 0.2.1-rc.5
 pnpm verify
 pnpm pack --dry-run
 ```

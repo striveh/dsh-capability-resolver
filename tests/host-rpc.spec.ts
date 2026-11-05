@@ -75,17 +75,29 @@ describe('loopback capability resolver RPC', () => {
 
   it('registers the fixed channel as loopback and returns the Connection disposer', () => {
     const dispose = vi.fn(async () => {})
-    const handle = vi.fn((_channel, _handler, _options) => dispose)
-    const ctx = { connection: { rpc: { handle } } } as unknown as Context
+    const handle = vi.fn((_channel, _handler) => dispose)
+    const ctx = {
+      connection: { allowsRemoteAuthorities: false, rpc: { handle } },
+    } as unknown as Context
     const resolve = vi.fn(async () => resolution())
 
     expect(registerCapabilityResolverRpc(ctx, resolve)).toBe(dispose)
     expect(handle).toHaveBeenCalledWith(
       CAPABILITY_RESOLVER_RPC_CHANNEL,
       expect.any(Function),
-      { authority: 'loopback' },
     )
     const registered = handle.mock.calls[0]?.[1] as ConnectionRpcHandler
     expect(registered).toBeTypeOf('function')
+  })
+
+  it('refuses to register when the Connection allows remote authorities', () => {
+    const handle = vi.fn(() => vi.fn(async () => {}))
+    const ctx = {
+      connection: { allowsRemoteAuthorities: true, rpc: { handle } },
+    } as unknown as Context
+    const resolve = vi.fn(async () => resolution())
+
+    expect(() => registerCapabilityResolverRpc(ctx, resolve)).toThrow(/loopback-only/)
+    expect(handle).not.toHaveBeenCalled()
   })
 })

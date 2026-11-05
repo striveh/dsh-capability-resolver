@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-Security fixes target the latest `0.1.x` release on the default branch. DSH compatibility is separately and narrowly limited to `0.1.1-rc.2` until reviewed evidence changes that declaration.
+Security fixes target the latest `0.2.x` release on the default branch. DSH compatibility is separately and narrowly limited to `0.2.1-rc.5` until reviewed evidence changes that declaration.
 
 ## Report a vulnerability privately
 

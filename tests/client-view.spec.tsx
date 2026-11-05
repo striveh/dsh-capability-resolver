@@ -17,7 +17,7 @@ import { CapabilityResolverController } from '../src/client/controller.ts'
 import { zh, type CapabilityResolverLocaleKey } from '../src/client/locales.ts'
 import { createCapabilityResolverViewStore } from '../src/client/store.ts'
 
-vi.mock('@deepseek-ai/dsh-client-runtime/client', () => ({
+vi.mock('@deepseek-ai/dsh-client-store', () => ({
   defineStore: (spec: {
     init: () => Record<string, unknown>
     actions: Record<string, (draft: Record<string, unknown>, ...args: unknown[]) => void>
@@ -56,7 +56,7 @@ vi.mock('@deepseek-ai/dsh-client-ui-primitives', async () => {
   return {
     Button: ({ children, size: _size, variant: _variant, ...props }: ButtonProps) =>
       createElement('button', props, children),
-    IconChevronDownOutline14: (props: Record<string, unknown>) => createElement('span', props),
+    IconChevronDownOutlineRegular: (props: Record<string, unknown>) => createElement('span', props),
     Pill: ({ active, children }: { readonly active?: boolean; readonly children?: ReactNode }) =>
       createElement('span', { 'data-active': active }, children),
     StateDot: ({ state }: { readonly state: string }) => createElement('span', { 'data-state': state }),

@@ -15,13 +15,13 @@ import type { CapabilityResolverSettingsTabInjected } from '../src/client/Capabi
 
 afterEach(() => { vi.restoreAllMocks() })
 
-vi.mock('@deepseek-ai/dsh-client-runtime/client', () => ({
+vi.mock('@deepseek-ai/dsh-client-store', () => ({
   defineStore: () => ({ create: () => ({}) }),
 }))
 
 vi.mock('@deepseek-ai/dsh-client-ui-primitives', () => ({
   Button: () => null,
-  IconChevronDownOutline14: () => null,
+  IconChevronDownOutlineRegular: () => null,
   Pill: () => null,
   StateDot: () => null,
   writeClipboard: () => Promise.resolve(false),

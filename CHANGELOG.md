@@ -4,6 +4,13 @@ All notable changes to this project are documented in this file. The format foll
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-05
+
+### Changed
+
+- Migrated the resolver to the reviewed DeepSeek Harness `0.2.1-rc.5` compatibility lane: `dsh-client-runtime` to `dsh-client-store`, the Slots service to `dsh-client-ui-renderer`, the loopback Connection RPC signature, and the renamed `IconChevronDownOutlineRegular`.
+- Advanced the package and compatibility-record release identity to `0.2.0` and updated the tracked authority digest for the `0.2.1-rc.5` release, including the Code Mode to PTC authority rename.
+
 ## [0.1.1] - 2026-08-27
 
 ### Fixed
@@ -29,6 +36,7 @@ All notable changes to this project are documented in this file. The format foll
 - Split the full loopback UI resolution from a safe model projection so untrusted catalog and current-capability free text cannot enter the `capability_resolve` canonical value, model render, or direct/nested result session content.
 - Revalidate the browser RPC byte, collection, text, and canonical candidate-link limits before any community metadata can render as an external link.
 
-[Unreleased]: https://github.com/striveh/dsh-capability-resolver/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/striveh/dsh-capability-resolver/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/striveh/dsh-capability-resolver/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/striveh/dsh-capability-resolver/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/striveh/dsh-capability-resolver/releases/tag/v0.1.0

@@ -3,9 +3,9 @@ import { dirname, resolve } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
 const PACKAGE_NAME = 'dsh-capability-resolver'
-const PACKAGE_VERSION = '0.1.1'
+const PACKAGE_VERSION = '0.2.0'
 const PLUGIN_NAME = 'capability-resolver'
-const DSH_VERSION = '0.1.1-rc.2'
+const DSH_VERSION = '0.2.1-rc.5'
 const PATCH_PATH = './cordis.patch.yml'
 const CATALOG_URL = 'https://awesome-dsh-plugin.com/plugins.json'
 const RPC_PATH = '/dsh-capability-resolver'
@@ -13,11 +13,12 @@ const CLIENT_LOADER_MARKER = 'window.__ModuleLoader__.load'
 const REQUIRED_CLIENT_INJECTIONS = [
   '@deepseek-ai/dsh-client-connection',
   '@deepseek-ai/dsh-client-locale',
-  '@deepseek-ai/dsh-client-runtime',
+  '@deepseek-ai/dsh-client-store',
   '@deepseek-ai/dsh-client-ui-settings',
   '@deepseek-ai/dsh-client-ui-settings-plugins',
   '@deepseek-ai/dsh-client-ui-primitives',
   '@deepseek-ai/dsh-client-ui-slots',
+  '@deepseek-ai/dsh-client-ui-renderer',
 ]
 const REQUIRED_DSH_PEERS = [
   ...REQUIRED_CLIENT_INJECTIONS,
@@ -121,9 +122,9 @@ check(valueAt(manifest, ['exports', './cordis.patch.yml']) === PATCH_PATH, 'patc
 check(valueAt(manifest, ['dsh', 'bundle', 'patch']) === PATCH_PATH, 'dsh.bundle.patch must reference ./cordis.patch.yml')
 check(valueAt(manifest, ['dsh', 'client', 'platform']) === 'web', 'dsh.client.platform must be web')
 check(valueAt(manifest, ['engines', 'dsh']) === DSH_VERSION, `engines.dsh must be exactly ${DSH_VERSION}`)
-check(valueAt(manifest, ['peerDependencies', '@deepseek-ai/cordis']) === '4.0.1', 'Cordis peer must be 4.0.1')
-check(valueAt(manifest, ['peerDependencies', '@deepseek-ai/cordis-plugin-loader']) === '1.0.2', 'Loader peer must be 1.0.2')
-check(valueAt(manifest, ['peerDependencies', '@deepseek-ai/schemastery']) === '3.18.1', 'Schemastery peer must be 3.18.1')
+check(valueAt(manifest, ['peerDependencies', '@deepseek-ai/cordis']) === '4.0.5', 'Cordis peer must be 4.0.5')
+check(valueAt(manifest, ['peerDependencies', '@deepseek-ai/cordis-plugin-loader']) === '1.0.6', 'Loader peer must be 1.0.6')
+check(valueAt(manifest, ['peerDependencies', '@deepseek-ai/schemastery']) === '3.18.5', 'Schemastery peer must be 3.18.5')
 for (const dependency of REQUIRED_DSH_PEERS) {
   check(valueAt(manifest, ['peerDependencies', dependency]) === DSH_VERSION, `${dependency} peer must be ${DSH_VERSION}`)
 }

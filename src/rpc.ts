@@ -86,14 +86,19 @@ export function createCapabilityResolverRpcHandler(resolve: CapabilityResolveOpe
   }
 }
 
-/** Register the loopback channel and return its asynchronous HMR disposer. */
+/** Register the loopback-only channel and return its asynchronous HMR disposer. */
 export function registerCapabilityResolverRpc(
   ctx: Context,
   resolve: CapabilityResolveOperation,
 ): () => Promise<void> {
+  // The Connection fence already restricts physical routes to loopback, the
+  // bind address, or configured trustedHosts. Refuse remote authorities so the
+  // resolver never opens its loopback-only channel to a non-local deployment.
+  if (ctx.connection.allowsRemoteAuthorities) {
+    throw new Error('dsh-capability-resolver requires a loopback-only Connection authority')
+  }
   return ctx.connection.rpc.handle(
     CAPABILITY_RESOLVER_RPC_CHANNEL,
     createCapabilityResolverRpcHandler(resolve),
-    { authority: 'loopback' },
   )
 }

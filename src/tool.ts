@@ -139,7 +139,7 @@ const modelResolutionOutputSchema = {
   },
 } as const satisfies ValueSchemaSpec
 
-/** Canonical value exposed to the model and Code Mode for one resolver call. */
+/** Canonical value exposed to the model and PTC mode for one resolver call. */
 export type CapabilityModelResolution = InferValue<typeof modelResolutionOutputSchema>
 
 type CapabilityModelCandidate = CapabilityModelResolution['candidates'][number]
