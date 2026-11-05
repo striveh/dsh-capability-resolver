@@ -187,7 +187,7 @@ declare const modelResolutionOutputSchema: {
         };
     };
 };
-/** Canonical value exposed to the model and Code Mode for one resolver call. */
+/** Canonical value exposed to the model and PTC mode for one resolver call. */
 export type CapabilityModelResolution = InferValue<typeof modelResolutionOutputSchema>;
 /**
  * Remove catalog and current-capability free text before the result reaches a model or session log.

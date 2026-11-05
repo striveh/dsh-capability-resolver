@@ -1,21 +1,21 @@
 {
   "schemaVersion": 1,
-  "packageVersion": "0.1.1",
+  "packageVersion": "0.2.0",
   "upstream": {
     "repository": "deepseek-ai/deepseek-harness",
     "defaultBranch": "master",
-    "verifiedTag": "dsh-v0.1.1-rc.2",
-    "verifiedVersion": "0.1.1-rc.2",
-    "verifiedTagCommit": "b150a551b8d465e31e418e1b2eaf5e79bbb7d28e",
-    "verifiedReleasePublishedAt": "2026-08-21T12:35:08Z",
-    "reviewedHead": "b150a551b8d465e31e418e1b2eaf5e79bbb7d28e",
-    "reviewedAt": "2026-08-24",
+    "verifiedTag": "dsh-v0.2.1-rc.5",
+    "verifiedVersion": "0.2.1-rc.5",
+    "verifiedTagCommit": "b830ec950faba0a46dda564be3e2d854afed94f1",
+    "verifiedReleasePublishedAt": "2026-10-30T02:12:26Z",
+    "reviewedHead": "b830ec950faba0a46dda564be3e2d854afed94f1",
+    "reviewedAt": "2026-11-05",
     "routeDigestAlgorithm": "sha256 of sorted path:gitBlobSha rows with a trailing LF",
-    "routeDigest": "bac0f088f16870d062f42fb8c6902100f027f3f0a085d0190c71b81d12584c61"
+    "routeDigest": "f8e2fec1c409d1e9750c8d6478443e332cccd2a95f36bdbab7ccd9ea1e36cdd1"
   },
   "claim": {
     "level": "single-release",
-    "statement": "Version 0.1.1 targets only DSH 0.1.1-rc.2; release compatibility requires the repository CI and installable-bundle acceptance evidence.",
+    "statement": "Version 0.2.0 targets only DSH 0.2.1-rc.5; release compatibility requires the repository CI and installable-bundle acceptance evidence.",
     "excludes": [
       "DeepSeek endorsement",
       "compatibility with any unlisted DSH release",
@@ -40,7 +40,7 @@
     { "path": "packages/client/ui-slots/src/index.ts", "when": "Client slot registration" },
     { "path": "packages/client/web/src/platform.ts", "when": "Web client module loading" },
     { "path": "packages/core/agent-loop/src/tool-calls.ts", "when": "durable model-facing tool result logging" },
-    { "path": "packages/core/tools/src/code-mode.ts", "when": "Code Mode canonical result exposure and nested result logging" },
+    { "path": "packages/core/tools/src/ptc.ts", "when": "PTC canonical result exposure and nested dispatch logging" },
     { "path": "packages/core/tools/src/index.ts", "when": "model-facing tool registration" },
     { "path": "packages/llm/llm/src/types.ts", "when": "model content block vocabulary" },
     { "path": "packages/skill/skill/src/index.ts", "when": "current skill capability reads" }

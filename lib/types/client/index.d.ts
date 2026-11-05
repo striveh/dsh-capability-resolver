@@ -1,5 +1,5 @@
 /** Need-first capability discovery page contributed to Web Plugins settings. */
-import type { ClientContext } from '@deepseek-ai/dsh-client-runtime/client';
+import type { Context as ClientContext } from '@deepseek-ai/cordis';
 import { type CapabilityResolverLocaleKey } from './locales.ts';
 declare module '@deepseek-ai/dsh-client-ui-slots' {
     interface LocaleNamespaceMap {

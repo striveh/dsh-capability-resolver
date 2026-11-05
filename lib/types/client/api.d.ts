@@ -1,4 +1,4 @@
-import type { ClientConnectionRpc, RpcError } from '@deepseek-ai/dsh-client-connection/client';
+import type { ClientConnectionRpc, ConnectionRpcFailure } from '@deepseek-ai/dsh-client-connection/client';
 import { type CapabilityResolution, type CapabilityResolveRequest } from '../types.ts';
 /**
  * Recheck the Host's canonical repository and catalog-page identity before rendering links.
@@ -13,9 +13,9 @@ export declare function parseCanonicalCandidateLinks(owner: string, repositoryUr
 } | undefined;
 /** Error returned through a valid Connection RPC failure envelope. */
 export declare class CapabilityResolverRpcError extends Error {
-    readonly code: RpcError['code'];
+    readonly code: ConnectionRpcFailure['code'];
     /** @param error - validated Connection RPC error. */
-    constructor(error: RpcError);
+    constructor(error: ConnectionRpcFailure);
 }
 /** Typed client consumed by the Settings page controller. */
 export interface CapabilityResolverClient {

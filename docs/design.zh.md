@@ -48,7 +48,7 @@ Host 负责配置、目录传输、输入上限、规范化记录、确定性排
 
 ## Consumer
 
-`capability_resolve` 工具把当前模型可调用工具/Skill 与 Host 目录解析结合。DSH `0.1.1-rc.2` 提供 canonical tool value 与渲染内容，但没有一个会改变模型序列化或会话重放行为的标准不可信内容标记。因此，工具会在 DSH 接收成功结果前，把完整解析结果映射为独立的安全 canonical value。该投影省略全部目录与当前能力自由文本，再次校验仓库、目录详情与可选 npm 标识符，只保留稳定来源身份和有界的本地/数值事实，并渲染明确的不可信数据提示。同一个安全值会进入 Code Mode。直接调用会把安全渲染发送给模型并写入 `tool/result`；Code Mode 子调用会把安全渲染写入 `tool/code-dispatch`。工具不会执行建议的下一步。
+`capability_resolve` 工具把当前模型可调用工具/Skill 与 Host 目录解析结合。DSH `0.2.1-rc.5` 提供 canonical tool value 与渲染内容，但没有一个会改变模型序列化或会话重放行为的标准不可信内容标记。因此，工具会在 DSH 接收成功结果前，把完整解析结果映射为独立的安全 canonical value。该投影省略全部目录与当前能力自由文本，再次校验仓库、目录详情与可选 npm 标识符，只保留稳定来源身份和有界的本地/数值事实，并渲染明确的不可信数据提示。同一个安全值会进入 PTC 模式。直接调用会把安全渲染发送给模型并写入 `tool/result`；PTC 子调用会把安全渲染写入 PTC dispatch 日志。工具不会执行建议的下一步。
 
 浏览器 Client 注册一个 `settings.plugins.tab` contribution。它调用固定 loopback channel，并在渲染已配置匹配、目录状态、候选与证据前深度校验完整响应。校验会再次执行 Host 的 512 KiB JSON 上限、列表/文本最大长度、canonical GitHub 仓库语法，以及由同一 owner/repository/path 身份推导的 awesome-dsh-plugin 详情页规则。该 UI-only 响应可以保留有界的不可信名称、描述、分类标签与警告，但不会被复用为工具结果。外部链接只有在通过该身份校验后才可交互。UI 不会拼接或执行安装命令。
 

@@ -1,7 +1,7 @@
 import { useId, type FormEvent, type ReactNode } from 'react'
 import {
   Button,
-  IconChevronDownOutline14,
+  IconChevronDownOutlineRegular,
   Pill,
   StateDot,
   writeClipboard,
@@ -179,7 +179,7 @@ function CandidateCard({
         onClick={onToggle}
       >
         {t(open ? 'hideEvidence' : 'showEvidence')}
-        <IconChevronDownOutline14 className={open ? css.chevronOpen : css.chevron} aria-hidden="true" />
+        <IconChevronDownOutlineRegular className={open ? css.chevronOpen : css.chevron} aria-hidden="true" />
       </Button>
       {open ? (
         <div className={css.details} id={detailId}>

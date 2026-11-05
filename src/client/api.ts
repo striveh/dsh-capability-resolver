@@ -1,6 +1,6 @@
 import type {
   ClientConnectionRpc,
-  RpcError,
+  ConnectionRpcFailure,
 } from '@deepseek-ai/dsh-client-connection/client'
 import {
   CAPABILITY_CATALOG_URL,
@@ -75,10 +75,10 @@ export function parseCanonicalCandidateLinks(
 
 /** Error returned through a valid Connection RPC failure envelope. */
 export class CapabilityResolverRpcError extends Error {
-  readonly code: RpcError['code']
+  readonly code: ConnectionRpcFailure['code']
 
   /** @param error - validated Connection RPC error. */
-  constructor(error: RpcError) {
+  constructor(error: ConnectionRpcFailure) {
     super(error.message)
     this.name = 'CapabilityResolverRpcError'
     this.code = error.code

@@ -6,13 +6,13 @@ Thanks for improving `dsh-capability-resolver`. Keep the plugin read-only, local
 
 - Node.js `22.19.x`
 - pnpm `11.21.0`
-- DeepSeek Harness `0.1.1-rc.2`, the only declared compatibility lane
+- DeepSeek Harness `0.2.1-rc.5`, the only declared compatibility lane
 
 Install and run the local gates:
 
 ```sh
 pnpm install --frozen-lockfile
-node scripts/assert-dsh-test-version.mjs 0.1.1-rc.2
+node scripts/assert-dsh-test-version.mjs 0.2.1-rc.5
 pnpm verify
 pnpm pack --dry-run
 ```

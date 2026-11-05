@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   verify:
-    name: DSH 0.1.1-rc.2 / Node 22.19 / pnpm 11.21
+    name: DSH 0.2.1-rc.5 / Node 22.19 / pnpm 11.21
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -32,10 +32,10 @@ jobs:
       - name: Install locked dependencies
         run: pnpm install --frozen-lockfile
       - name: Assert a uniform DSH dependency graph
-        run: node scripts/assert-dsh-test-version.mjs 0.1.1-rc.2
+        run: node scripts/assert-dsh-test-version.mjs 0.2.1-rc.5
       - name: Verify source, checked-in artifacts, behavior, compatibility, and package
         run: pnpm verify
       - name: Confirm the DSH graph remained uniform
-        run: node scripts/assert-dsh-test-version.mjs 0.1.1-rc.2
+        run: node scripts/assert-dsh-test-version.mjs 0.2.1-rc.5
       - name: Preview package contents
         run: pnpm pack --dry-run

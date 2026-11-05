@@ -1,9 +1,10 @@
 /** Need-first capability discovery page contributed to Web Plugins settings. */
 
+import type { Context as ClientContext } from '@deepseek-ai/cordis'
 import type { ConnectionHandle } from '@deepseek-ai/dsh-client-connection/client'
 import type {} from '@deepseek-ai/dsh-client-locale/client'
-import type { ClientContext } from '@deepseek-ai/dsh-client-runtime/client'
 import type {} from '@deepseek-ai/dsh-client-ui-settings/client'
+import type {} from '@deepseek-ai/dsh-client-ui-renderer/client'
 import { createCapabilityResolverClient } from './api.ts'
 import {
   CapabilityResolverSettingsTab,
@@ -32,7 +33,8 @@ export function apply(ctx: ClientContext): void {
   const connection = ctx.get('connection') as ConnectionHandle
   const client = createCapabilityResolverClient(connection.rpc)
   const controller = new CapabilityResolverController((task, signal) => {
-    const locale = ctx.locale.getSnapshot().active
+    const active = ctx.locale.getSnapshot().active
+    const locale: 'zh' | 'en' = active === 'zh' ? 'zh' : 'en'
     return client.resolve({ task, locale }, signal)
   })
   const store = createCapabilityResolverViewStore()

@@ -3,8 +3,8 @@ import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const expected = process.argv[2]
-if (expected !== '0.1.1-rc.2') {
-  throw new Error(`expected the sole supported DSH release 0.1.1-rc.2, received ${expected ?? '<missing>'}`)
+if (expected !== '0.2.1-rc.5') {
+  throw new Error(`expected the sole supported DSH release 0.2.1-rc.5, received ${expected ?? '<missing>'}`)
 }
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')

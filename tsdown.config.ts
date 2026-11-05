@@ -13,8 +13,8 @@ const PLATFORM_MODULES = [
   '@deepseek-ai/dsh-client-ui-primitives',
 ]
 
-const RUNTIME_STORE_EXEMPTION = '@deepseek-ai/dsh-client-runtime/client'
-const CLIENT_EXTERNALS: readonly string[] = [...PLATFORM_MODULES, RUNTIME_STORE_EXEMPTION]
+const CLIENT_STORE_EXEMPTION = '@deepseek-ai/dsh-client-store'
+const CLIENT_EXTERNALS: readonly string[] = [...PLATFORM_MODULES, CLIENT_STORE_EXEMPTION]
 const PLUGIN_ID: string = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8')).name
 const CSS_VIRTUAL_PREFIX = '\0dsh-capability-resolver-css:'
 const CSS_VIRTUAL_SUFFIX = '.mjs'

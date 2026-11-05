@@ -6,6 +6,6 @@ import { type CapabilityResolution, type CapabilityResolveRequest } from './type
 export type CapabilityResolveOperation = (request: CapabilityResolveRequest, signal: AbortSignal) => Promise<CapabilityResolution>;
 /** Build the sole RPC handler without registering a physical route. */
 export declare function createCapabilityResolverRpcHandler(resolve: CapabilityResolveOperation): ConnectionRpcHandler;
-/** Register the loopback channel and return its asynchronous HMR disposer. */
+/** Register the loopback-only channel and return its asynchronous HMR disposer. */
 export declare function registerCapabilityResolverRpc(ctx: Context, resolve: CapabilityResolveOperation): () => Promise<void>;
 //# sourceMappingURL=rpc.d.ts.map
